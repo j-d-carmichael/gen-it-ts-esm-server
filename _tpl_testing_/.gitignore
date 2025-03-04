@@ -1,0 +1,4 @@
+# ignore everything except the readme, spec file and package json
+*
+!api/package.json
+!api_spec/release/api_spec.yml

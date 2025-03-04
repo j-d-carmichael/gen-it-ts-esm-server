@@ -1,0 +1,5 @@
+export { default as NodegenRequest } from '@/http/interfaces/NodegenRequest.js';
+
+{% for interface in swagger.interfaces -%}
+export { {{ interface.name}} } from './{{ interface.name }}.js';
+{% endfor %}

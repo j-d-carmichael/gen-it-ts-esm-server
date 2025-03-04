@@ -1,0 +1,13 @@
+{
+  "name": "some-api",
+  "description": "",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "generate:server": "generate-it ../api_spec/release/api_spec.yml -y -m -u -t https://github.com/j-d-carmichael/gen-it-ts-esm-server"
+  },
+  "devDependencies": {
+    "generate-it": "^5.61.0"
+  }
+}

@@ -1,0 +1,144 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Snippets from some random API to test the tpl lib
+paths:
+  /admin/characters/default/{characterId}:
+    get:
+      tags:
+        - Admin
+      summary: Get default based on {characterId}, from characters, from admin
+      operationId: adminCharactersDefaultCharacterIdGet
+      security:
+        - jwtToken: []
+      parameters:
+        - $ref: '#/components/parameters/PathCharacterId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Character'
+          description: OK
+      x-async-validators:
+        - resourceCheck
+      x-permission: apiAiProxyAdminCharactersDefaultCharacterIdGetRead
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Get health
+      operationId: healthGet
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+components:
+  securitySchemes:
+    jwtToken:
+      type: apiKey
+      in: header
+      name: Authorization
+  parameters:
+    PathCharacterId:
+      in: path
+      name: characterId
+      schema:
+        type: string
+      required: true
+      description: ID of object to fetch
+  schemas:
+    CharacterBaseAttributes:
+      type: object
+      required:
+        - isStockCharacter
+        - name
+        - personality
+        - appearance
+        - backstory
+      properties:
+        isStockCharacter:
+          type: boolean
+        name:
+          type: string
+        personality:
+          type: string
+          description: Describes the character's behavior, traits, and disposition
+        appearance:
+          type: string
+          description: Physical description of the character
+        backstory:
+          type: string
+          description: History and significant life events that shaped the character
+    Character:
+      allOf:
+        - $ref: '#/components/schemas/CharacterBaseAttributes'
+        - type: object
+          required:
+            - _id
+            - createdAt
+            - updatedAt
+            - userId
+          properties:
+            _id:
+              type: string
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            userId:
+              type: string
+    Health:
+      type: object
+      properties:
+        http:
+          type: boolean
+    JwtAccess:
+      allOf:
+        - allOf:
+            - type: object
+              required:
+                - _id
+                - email
+                - username
+                - language
+                - firstName
+                - lastName
+                - verified
+                - roles
+              properties:
+                _id:
+                  type: string
+                createdAt:
+                  type: string
+                  format: date-time
+                updatedAt:
+                  type: string
+                  format: date-time
+                email:
+                  type: string
+                username:
+                  type: string
+                firstName:
+                  type: string
+                  minLength: 2
+                lastName:
+                  type: string
+                  minLength: 2
+                verified:
+                  type: boolean
+                roles:
+                  type: array
+                  items:
+                    type: string
+            - type: object
+              required:
+                - renewalId
+              properties:
+                renewalId:
+                  type: string
