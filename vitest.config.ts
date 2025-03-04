@@ -5,7 +5,7 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     include: ['**/*.test.ts'],
-    exclude: ['node_modules', 'dist'],
+    exclude: ['node_modules', 'dist', '.openapi-nodegen'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
