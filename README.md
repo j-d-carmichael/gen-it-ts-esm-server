@@ -36,7 +36,11 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## High level design
+## Introduction
+This is a fork of the original typescript server (https://github.com/acr-lfr/openapi-nodegen-typescript-server) with some modifications... it has been converted to use typescript but compile down to ESM code. Multiple methods were attempted including using https://swc.rs/docs/getting-started.
+
+**The next iteration / advancement will likely be toward deno.**
+
 The http layer is completely managed, uses expressjs & lives at the location specified by `.nodegenrc` `nodegenDir` key (default is `src/http/`). All files in the `nodegenDir` folder are overwritten each time you regenrate.  
 
 The `app.ts` calls the `src/http/index.ts` which returns the initialized express app. You can inject middleware and other options, see the `HttpOptions` interface in the `src/http/index.ts`.
