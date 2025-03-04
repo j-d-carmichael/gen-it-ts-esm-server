@@ -41,6 +41,8 @@ This is a fork of the original typescript server (https://github.com/acr-lfr/ope
 
 **The next iteration / advancement will likely be toward deno.**
 
+SWC was tried but ultimately it failed due to a regex issue preventing imports of json files: https://github.com/swc-project/plugins/issues/47#issuecomment-2694860249
+
 The http layer is completely managed, uses expressjs & lives at the location specified by `.nodegenrc` `nodegenDir` key (default is `src/http/`). All files in the `nodegenDir` folder are overwritten each time you regenrate.  
 
 The `app.ts` calls the `src/http/index.ts` which returns the initialized express app. You can inject middleware and other options, see the `HttpOptions` interface in the `src/http/index.ts`.
